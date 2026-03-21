@@ -6,10 +6,7 @@ export async function POST() {
     const count = await prisma.saint.count();
 
     if (count === 0) {
-      return NextResponse.json(
-        { error: 'Nenhum santo disponível para sorteio' },
-        { status: 404 },
-      );
+      return NextResponse.json({ error: 'Nenhum santo disponível para sorteio' }, { status: 404 });
     }
 
     const skip = Math.floor(Math.random() * count);

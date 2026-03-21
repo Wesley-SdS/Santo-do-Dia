@@ -1,8 +1,8 @@
 'use client';
 
+import { Calendar, Compass, Home, Sparkles, User } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Calendar, Compass, Sparkles, User } from 'lucide-react';
 
 const NAV_ITEMS = [
   { href: '/', icon: Home, label: 'Início' },
@@ -25,9 +25,7 @@ export function BottomNav() {
               key={item.href}
               href={item.href}
               className={`flex flex-col items-center gap-0.5 px-3 py-1 text-xs transition-colors ${
-                isActive
-                  ? 'text-gold'
-                  : 'text-muted-foreground hover:text-foreground'
+                isActive ? 'text-gold' : 'text-muted-foreground hover:text-foreground'
               }`}
             >
               <item.icon className={`h-5 w-5 ${isActive ? 'text-gold' : ''}`} />

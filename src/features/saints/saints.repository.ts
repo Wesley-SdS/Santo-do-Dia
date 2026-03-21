@@ -1,5 +1,5 @@
-import { prisma } from '@/lib/db';
 import type { Saint, SaintCategory } from '@prisma/client';
+import { prisma } from '@/lib/db';
 import { DEFAULT_PAGE_SIZE, MAX_PAGE_SIZE } from './saints.constants';
 import type { SaintListItem, SaintSearchParams } from './saints.types';
 

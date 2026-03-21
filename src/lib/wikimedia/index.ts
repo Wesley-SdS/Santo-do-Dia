@@ -45,7 +45,7 @@ export async function searchCommonsImages(query: string, limit = 5): Promise<Wik
     images.push({
       title: page.title as string,
       url: imageinfo.url as string,
-      thumbUrl: imageinfo.thumburl as string ?? imageinfo.url as string,
+      thumbUrl: (imageinfo.thumburl as string) ?? (imageinfo.url as string),
       width: imageinfo.width as number,
       height: imageinfo.height as number,
       descriptionUrl: imageinfo.descriptionurl as string,

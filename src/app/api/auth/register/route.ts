@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
 import bcrypt from 'bcryptjs';
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/db';
 
@@ -26,10 +26,7 @@ export async function POST(request: NextRequest) {
 
     const existingUser = await prisma.user.findUnique({ where: { email } });
     if (existingUser) {
-      return NextResponse.json(
-        { error: 'Este email já está cadastrado' },
-        { status: 409 },
-      );
+      return NextResponse.json({ error: 'Este email já está cadastrado' }, { status: 409 });
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -43,14 +40,8 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    return NextResponse.json(
-      { id: user.id, name: user.name, email: user.email },
-      { status: 201 },
-    );
+    return NextResponse.json({ id: user.id, name: user.name, email: user.email }, { status: 201 });
   } catch {
-    return NextResponse.json(
-      { error: 'Erro ao criar conta' },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: 'Erro ao criar conta' }, { status: 500 });
   }
 }

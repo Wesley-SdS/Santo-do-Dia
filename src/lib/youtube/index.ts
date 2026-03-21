@@ -11,10 +11,7 @@ export interface YouTubeVideo {
   watchUrl: string;
 }
 
-export async function searchYouTubeVideos(
-  query: string,
-  maxResults = 5,
-): Promise<YouTubeVideo[]> {
+export async function searchYouTubeVideos(query: string, maxResults = 5): Promise<YouTubeVideo[]> {
   const apiKey = process.env.YOUTUBE_API_KEY;
 
   if (!apiKey) {
@@ -71,7 +68,7 @@ async function searchYouTubeOEmbed(query: string): Promise<YouTubeVideo[]> {
     title: item.title as string,
     description: (item.description as string) ?? '',
     thumbnailUrl: `https://i.ytimg.com/vi/${item.videoId}/hqdefault.jpg`,
-    channelTitle: item.author as string ?? '',
+    channelTitle: (item.author as string) ?? '',
     publishedAt: '',
     embedUrl: `https://www.youtube.com/embed/${item.videoId}`,
     watchUrl: `https://www.youtube.com/watch?v=${item.videoId}`,

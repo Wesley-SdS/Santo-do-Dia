@@ -1,5 +1,5 @@
-import { prisma } from '@/lib/db';
 import type { Donation, DonationStatus } from '@prisma/client';
+import { prisma } from '@/lib/db';
 
 export async function createDonation(data: {
   amountCents: number;

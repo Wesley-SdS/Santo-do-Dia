@@ -1,7 +1,7 @@
 'use client';
 
-import Link from 'next/link';
 import { Calendar, MapPin } from 'lucide-react';
+import Link from 'next/link';
 import { SAINT_CATEGORIES_PT } from '@/constants';
 
 interface SaintCardProps {
@@ -18,8 +18,18 @@ interface SaintCardProps {
 }
 
 const MONTH_NAMES = [
-  'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-  'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro',
+  'Janeiro',
+  'Fevereiro',
+  'Março',
+  'Abril',
+  'Maio',
+  'Junho',
+  'Julho',
+  'Agosto',
+  'Setembro',
+  'Outubro',
+  'Novembro',
+  'Dezembro',
 ];
 
 export function SaintCard({
@@ -44,11 +54,7 @@ export function SaintCard({
           {/* Image */}
           <div className="relative aspect-[4/3] w-full bg-gradient-to-br from-gold/20 to-deep-blue/10">
             {imageUrl ? (
-              <img
-                src={imageUrl}
-                alt={name}
-                className="h-full w-full object-cover object-top"
-              />
+              <img src={imageUrl} alt={name} className="h-full w-full object-cover object-top" />
             ) : (
               <div className="flex h-full w-full items-center justify-center">
                 <span className="font-[family-name:var(--font-dm-serif)] text-6xl text-gold/30">
@@ -92,11 +98,7 @@ export function SaintCard({
         <article className="flex items-center gap-3 rounded-xl bg-card p-3 transition-colors hover:bg-muted">
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-gold/10">
             {imageUrl ? (
-              <img
-                src={imageUrl}
-                alt={name}
-                className="h-full w-full rounded-lg object-cover"
-              />
+              <img src={imageUrl} alt={name} className="h-full w-full rounded-lg object-cover" />
             ) : (
               <span className="font-[family-name:var(--font-dm-serif)] text-lg text-gold">
                 {name.charAt(0)}
@@ -117,11 +119,7 @@ export function SaintCard({
       <article className="overflow-hidden rounded-xl bg-card shadow-sm transition-all hover:shadow-md">
         <div className="relative aspect-[3/2] bg-gradient-to-br from-gold/10 to-deep-blue/5">
           {imageUrl ? (
-            <img
-              src={imageUrl}
-              alt={name}
-              className="h-full w-full object-cover object-top"
-            />
+            <img src={imageUrl} alt={name} className="h-full w-full object-cover object-top" />
           ) : (
             <div className="flex h-full w-full items-center justify-center">
               <span className="font-[family-name:var(--font-dm-serif)] text-4xl text-gold/20">
@@ -149,9 +147,7 @@ export function SaintCard({
               </span>
             )}
           </div>
-          <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
-            {biographyShort}
-          </p>
+          <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{biographyShort}</p>
         </div>
       </article>
     </Link>

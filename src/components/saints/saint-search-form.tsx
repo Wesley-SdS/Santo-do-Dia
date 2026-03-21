@@ -1,8 +1,8 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useState, useEffect, useCallback } from 'react';
 import { Search, X } from 'lucide-react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useCallback, useEffect, useState } from 'react';
 
 const CATEGORIES = [
   { value: '', label: 'Todas as categorias' },

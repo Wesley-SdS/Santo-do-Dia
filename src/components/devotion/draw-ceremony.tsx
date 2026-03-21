@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Heart, Calendar, MapPin } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Calendar, Heart, MapPin, Sparkles } from 'lucide-react';
 import Link from 'next/link';
+import { useState } from 'react';
 
 type Step = 'prayer' | 'drawing' | 'reveal';
 
@@ -20,8 +20,18 @@ interface DrawnSaint {
 }
 
 const MONTH_NAMES = [
-  'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-  'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro',
+  'Janeiro',
+  'Fevereiro',
+  'Março',
+  'Abril',
+  'Maio',
+  'Junho',
+  'Julho',
+  'Agosto',
+  'Setembro',
+  'Outubro',
+  'Novembro',
+  'Dezembro',
 ];
 
 export function DrawCeremony() {
@@ -52,7 +62,8 @@ export function DrawCeremony() {
         feastMonth: 3,
         feastDay: 19,
         category: 'CONFESSOR',
-        biographyShort: 'Esposo da Virgem Maria e pai adotivo de Jesus Cristo. Patrono da Igreja Universal.',
+        biographyShort:
+          'Esposo da Virgem Maria e pai adotivo de Jesus Cristo. Patrono da Igreja Universal.',
         imageUrl: null,
         country: 'Israel',
       });
@@ -80,10 +91,9 @@ export function DrawCeremony() {
           </div>
 
           <p className="mt-6 text-center font-[family-name:var(--font-dm-serif)] text-sm italic leading-relaxed text-white/90">
-            &ldquo;Espírito Santo, iluminai-me. Santo Anjo da Guarda, escolhei por mim
-            o santo que me acompanhará neste ano. Que eu possa, pela intercessão deste
-            santo, crescer nas virtudes e aproximar-me cada dia mais de Nosso Senhor
-            Jesus Cristo. Amém.&rdquo;
+            &ldquo;Espírito Santo, iluminai-me. Santo Anjo da Guarda, escolhei por mim o santo que
+            me acompanhará neste ano. Que eu possa, pela intercessão deste santo, crescer nas
+            virtudes e aproximar-me cada dia mais de Nosso Senhor Jesus Cristo. Amém.&rdquo;
           </p>
 
           <button

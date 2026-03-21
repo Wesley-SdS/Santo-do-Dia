@@ -1,6 +1,6 @@
+import { Mail } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Mail } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Verificar Email',
@@ -21,10 +21,7 @@ export default function VerificarPage() {
       <p className="mt-2 text-xs text-muted-foreground">
         Pode levar alguns minutos. Verifique também a pasta de spam.
       </p>
-      <Link
-        href="/login"
-        className="mt-8 inline-block text-sm text-gold hover:underline"
-      >
+      <Link href="/login" className="mt-8 inline-block text-sm text-gold hover:underline">
         Voltar para login
       </Link>
     </div>

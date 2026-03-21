@@ -1,8 +1,8 @@
 export { AppError } from './base.error';
 export {
-  NotFoundError,
-  ValidationError,
-  RateLimitExceededError,
   ExternalServiceError,
+  NotFoundError,
+  RateLimitExceededError,
   UnauthorizedError,
+  ValidationError,
 } from './domain.errors';

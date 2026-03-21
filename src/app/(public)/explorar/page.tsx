@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
 import { Search } from 'lucide-react';
-import { prisma } from '@/lib/db';
+import type { Metadata } from 'next';
 import { SaintCard } from '@/components/saints/saint-card';
 import { SaintSearchForm } from '@/components/saints/saint-search-form';
+import { prisma } from '@/lib/db';
 
 export const dynamic = 'force-dynamic';
 

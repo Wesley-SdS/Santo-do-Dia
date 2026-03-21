@@ -1,3 +1,3 @@
+export * from './donations.schemas';
 export * from './donations.service';
 export * from './donations.types';
-export * from './donations.schemas';

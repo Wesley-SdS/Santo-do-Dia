@@ -56,18 +56,27 @@ export async function searchWikipedia(query: string): Promise<WikipediaPage | nu
     title: page.title,
     extract: page.extract ?? '',
     thumbnail: page.thumbnail
-      ? { source: page.thumbnail.source, width: page.thumbnail.width, height: page.thumbnail.height }
+      ? {
+          source: page.thumbnail.source,
+          width: page.thumbnail.width,
+          height: page.thumbnail.height,
+        }
       : undefined,
     originalimage: page.original
       ? { source: page.original.source, width: page.original.width, height: page.original.height }
       : undefined,
     content_urls: page.fullurl
-      ? { desktop: { page: page.fullurl }, mobile: { page: page.fullurl.replace('pt.wikipedia', 'pt.m.wikipedia') } }
+      ? {
+          desktop: { page: page.fullurl },
+          mobile: { page: page.fullurl.replace('pt.wikipedia', 'pt.m.wikipedia') },
+        }
       : undefined,
   };
 }
 
-export async function getWikipediaSummary(title: string): Promise<{ extract: string; image?: string } | null> {
+export async function getWikipediaSummary(
+  title: string,
+): Promise<{ extract: string; image?: string } | null> {
   const url = `https://pt.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`;
 
   const response = await fetch(url, {

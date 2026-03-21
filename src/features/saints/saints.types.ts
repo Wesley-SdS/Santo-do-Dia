@@ -2,7 +2,15 @@ import type { Saint } from '@prisma/client';
 
 export type SaintListItem = Pick<
   Saint,
-  'id' | 'name' | 'slug' | 'feastMonth' | 'feastDay' | 'category' | 'biographyShort' | 'imageUrl' | 'country'
+  | 'id'
+  | 'name'
+  | 'slug'
+  | 'feastMonth'
+  | 'feastDay'
+  | 'category'
+  | 'biographyShort'
+  | 'imageUrl'
+  | 'country'
 >;
 
 export interface SaintSearchParams {

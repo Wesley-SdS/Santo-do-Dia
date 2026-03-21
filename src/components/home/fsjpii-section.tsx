@@ -1,6 +1,16 @@
 'use client';
 
-import { ExternalLink, Instagram, Music, Users, Church, Heart, Play, Youtube, BookOpen } from 'lucide-react';
+import {
+  BookOpen,
+  Church,
+  ExternalLink,
+  Heart,
+  Instagram,
+  Music,
+  Play,
+  Users,
+  Youtube,
+} from 'lucide-react';
 
 const FSJPII_SONGS = [
   { name: 'Terra Seca', views: '66M+' },
@@ -37,14 +47,12 @@ export function FSJPIISection() {
         {/* Founder */}
         <div className="mt-5 rounded-xl bg-white/10 p-4">
           <p className="text-xs font-medium text-gold-light">Fundador</p>
-          <p className="mt-1 text-sm font-semibold text-white">
-            Padre Ailton Fernandes Cardoso
-          </p>
+          <p className="mt-1 text-sm font-semibold text-white">Padre Ailton Fernandes Cardoso</p>
           <p className="mt-1 text-xs leading-relaxed text-white/70">
-            Natural de Alagoa Nova, Paraíba. Filho de agricultores, desde os 9 anos
-            já fazia catequese e cantava no coral da comunidade. Fundou a Fraternidade
-            em 1º de maio de 2012 como &ldquo;fruto da experiência do amor de Deus&rdquo;
-            na Diocese de Santo Amaro, São Paulo.
+            Natural de Alagoa Nova, Paraíba. Filho de agricultores, desde os 9 anos já fazia
+            catequese e cantava no coral da comunidade. Fundou a Fraternidade em 1º de maio de 2012
+            como &ldquo;fruto da experiência do amor de Deus&rdquo; na Diocese de Santo Amaro, São
+            Paulo.
           </p>
         </div>
 
@@ -54,19 +62,25 @@ export function FSJPIISection() {
             <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-full bg-gold/20">
               <Church className="h-4 w-4 text-gold" />
             </div>
-            <p className="mt-2 text-[11px] font-medium text-white leading-tight">Santificar o Clero</p>
+            <p className="mt-2 text-[11px] font-medium text-white leading-tight">
+              Santificar o Clero
+            </p>
           </div>
           <div className="rounded-xl bg-white/10 p-3 text-center">
             <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-full bg-gold/20">
               <Heart className="h-4 w-4 text-gold" />
             </div>
-            <p className="mt-2 text-[11px] font-medium text-white leading-tight">Restaurar as Famílias</p>
+            <p className="mt-2 text-[11px] font-medium text-white leading-tight">
+              Restaurar as Famílias
+            </p>
           </div>
           <div className="rounded-xl bg-white/10 p-3 text-center">
             <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-full bg-gold/20">
               <Users className="h-4 w-4 text-gold" />
             </div>
-            <p className="mt-2 text-[11px] font-medium text-white leading-tight">Salvar a Juventude</p>
+            <p className="mt-2 text-[11px] font-medium text-white leading-tight">
+              Salvar a Juventude
+            </p>
           </div>
         </div>
 
@@ -108,9 +122,7 @@ export function FSJPIISection() {
                 className="rounded-full bg-white/10 px-2.5 py-1 text-[11px] text-white/80"
               >
                 {song.name}
-                {song.views && (
-                  <span className="ml-1 text-gold/70">{song.views}</span>
-                )}
+                {song.views && <span className="ml-1 text-gold/70">{song.views}</span>}
               </span>
             ))}
           </div>
@@ -118,13 +130,13 @@ export function FSJPIISection() {
 
         {/* Description */}
         <p className="mt-5 text-xs leading-relaxed text-white/60">
-          Uma das maiores forças de evangelização digital do Brasil, a FSJPII está presente
-          em diversas dioceses com comunidades de vida, seminários e casas de formação. Através
-          do Centro de Acolhida Nossa Senhora de Fátima (Parelheiros, SP), acolhe dependentes
-          químicos e moradores em situação de rua, realizando visitas mensais à Cracolândia.
-          Seu principal evento, o <strong className="text-white/80">Retiro Nova Forma</strong>,
-          acontece anualmente durante o Carnaval. O SantoDia nasce como extensão natural dessa
-          missão evangelizadora.
+          Uma das maiores forças de evangelização digital do Brasil, a FSJPII está presente em
+          diversas dioceses com comunidades de vida, seminários e casas de formação. Através do
+          Centro de Acolhida Nossa Senhora de Fátima (Parelheiros, SP), acolhe dependentes químicos
+          e moradores em situação de rua, realizando visitas mensais à Cracolândia. Seu principal
+          evento, o <strong className="text-white/80">Retiro Nova Forma</strong>, acontece
+          anualmente durante o Carnaval. O SantoDia nasce como extensão natural dessa missão
+          evangelizadora.
         </p>
 
         {/* Links */}

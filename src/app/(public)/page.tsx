@@ -1,9 +1,9 @@
-import { Suspense } from 'react';
+import { ArrowRight, Calendar, Compass, Heart, Sparkles } from 'lucide-react';
 import Link from 'next/link';
-import { ArrowRight, Calendar, Compass, Sparkles, Heart } from 'lucide-react';
-import { SaintOfDayHero } from '@/components/saints/saint-of-day-hero';
-import { JPIISection } from '@/components/home/jpii-section';
+import { Suspense } from 'react';
 import { FSJPIISection } from '@/components/home/fsjpii-section';
+import { JPIISection } from '@/components/home/jpii-section';
+import { SaintOfDayHero } from '@/components/saints/saint-of-day-hero';
 
 export const dynamic = 'force-dynamic';
 
@@ -63,9 +63,7 @@ export default function HomePage() {
           <p className="font-[family-name:var(--font-dm-serif)] text-lg italic leading-relaxed">
             &ldquo;Não tenham medo! Abram, abram de par em par as portas a Cristo!&rdquo;
           </p>
-          <p className="mt-3 text-sm text-gold-light">
-            — São João Paulo II, 22 de outubro de 1978
-          </p>
+          <p className="mt-3 text-sm text-gold-light">— São João Paulo II, 22 de outubro de 1978</p>
         </div>
       </section>
 
@@ -82,9 +80,7 @@ export default function HomePage() {
           className="group flex items-center justify-between rounded-xl border border-gold/20 bg-gold/5 p-4 transition-colors hover:bg-gold/10"
         >
           <div>
-            <p className="text-sm font-medium text-foreground">
-              Apoie o SantoDia
-            </p>
+            <p className="text-sm font-medium text-foreground">Apoie o SantoDia</p>
             <p className="text-xs text-muted-foreground">
               100% gratuito, sustentado por doações via Pix
             </p>

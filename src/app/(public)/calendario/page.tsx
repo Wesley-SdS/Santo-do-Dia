@@ -12,9 +12,7 @@ export default function CalendarioPage() {
       <h1 className="font-[family-name:var(--font-dm-serif)] text-2xl text-foreground">
         Calendário Litúrgico
       </h1>
-      <p className="mt-1 text-sm text-muted-foreground">
-        Santos e festas litúrgicas de cada dia
-      </p>
+      <p className="mt-1 text-sm text-muted-foreground">Santos e festas litúrgicas de cada dia</p>
       <div className="mt-6">
         <LiturgicalCalendar />
       </div>

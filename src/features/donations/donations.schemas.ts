@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { MIN_DONATION_CENTS, MAX_DONATION_CENTS } from '@/constants';
+import { MAX_DONATION_CENTS, MIN_DONATION_CENTS } from '@/constants';
 
 export const createDonationSchema = z.object({
   amount: z

@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 import { createDonationSchema } from '@/features/donations/donations.schemas';
 
 export async function POST(request: NextRequest) {
@@ -21,17 +21,17 @@ export async function POST(request: NextRequest) {
     // For now, return a mock response
     const pixCopyPaste = `00020126580014br.gov.bcb.pix0136${txid}5204000053039865406${(amountCents / 100).toFixed(2)}5802BR5913SantoDia FSJPII6008Brasilia62070503***6304`;
 
-    return NextResponse.json({
-      txid,
-      pixCopyPaste,
-      qrCodeBase64: '',
-      expiresAt: new Date(Date.now() + 30 * 60 * 1000).toISOString(),
-    }, { status: 201 });
-  } catch {
     return NextResponse.json(
-      { error: 'Erro ao gerar cobrança Pix' },
-      { status: 500 },
+      {
+        txid,
+        pixCopyPaste,
+        qrCodeBase64: '',
+        expiresAt: new Date(Date.now() + 30 * 60 * 1000).toISOString(),
+      },
+      { status: 201 },
     );
+  } catch {
+    return NextResponse.json({ error: 'Erro ao gerar cobrança Pix' }, { status: 500 });
   }
 }
 

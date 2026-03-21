@@ -1,9 +1,9 @@
 'use client';
 
-import { useSession, signOut } from 'next-auth/react';
+import { LogIn, LogOut, User } from 'lucide-react';
 import Link from 'next/link';
-import { User, LogOut, LogIn } from 'lucide-react';
-import { useState, useRef, useEffect } from 'react';
+import { signOut, useSession } from 'next-auth/react';
+import { useEffect, useRef, useState } from 'react';
 
 export function UserMenu() {
   const { data: session, status } = useSession();
@@ -21,9 +21,7 @@ export function UserMenu() {
   }, []);
 
   if (status === 'loading') {
-    return (
-      <div className="h-8 w-8 animate-pulse rounded-full bg-muted" />
-    );
+    return <div className="h-8 w-8 animate-pulse rounded-full bg-muted" />;
   }
 
   if (!session?.user) {
@@ -62,9 +60,7 @@ export function UserMenu() {
             <p className="text-sm font-medium text-foreground truncate">
               {session.user.name ?? 'Peregrino'}
             </p>
-            <p className="text-xs text-muted-foreground truncate">
-              {session.user.email}
-            </p>
+            <p className="text-xs text-muted-foreground truncate">{session.user.email}</p>
           </div>
           <div className="p-1">
             <Link

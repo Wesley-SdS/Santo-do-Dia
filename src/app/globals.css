@@ -2,9 +2,9 @@
 
 :root {
   --background: oklch(0.97 0.01 90);
-  --foreground: oklch(0.20 0.02 260);
-  --card: oklch(1.0 0 0);
-  --card-foreground: oklch(0.20 0.02 260);
+  --foreground: oklch(0.2 0.02 260);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.02 260);
   --primary: oklch(0.75 0.12 85);
   --primary-foreground: oklch(0.15 0.02 260);
   --secondary: oklch(0.25 0.08 260);
@@ -12,8 +12,8 @@
   --muted: oklch(0.93 0.01 90);
   --muted-foreground: oklch(0.55 0.02 70);
   --accent: oklch(0.85 0.08 85);
-  --accent-foreground: oklch(0.20 0.02 260);
-  --destructive: oklch(0.55 0.20 25);
+  --accent-foreground: oklch(0.2 0.02 260);
+  --destructive: oklch(0.55 0.2 25);
   --destructive-foreground: oklch(0.98 0.005 90);
   --border: oklch(0.88 0.01 90);
   --input: oklch(0.88 0.01 90);
@@ -23,21 +23,21 @@
 
 .dark {
   --background: oklch(0.15 0.02 260);
-  --foreground: oklch(0.90 0.01 90);
-  --card: oklch(0.20 0.03 260);
-  --card-foreground: oklch(0.90 0.01 90);
+  --foreground: oklch(0.9 0.01 90);
+  --card: oklch(0.2 0.03 260);
+  --card-foreground: oklch(0.9 0.01 90);
   --primary: oklch(0.75 0.12 85);
   --primary-foreground: oklch(0.15 0.02 260);
   --secondary: oklch(0.25 0.06 260);
-  --secondary-foreground: oklch(0.90 0.01 90);
+  --secondary-foreground: oklch(0.9 0.01 90);
   --muted: oklch(0.25 0.03 260);
   --muted-foreground: oklch(0.65 0.02 70);
-  --accent: oklch(0.30 0.06 260);
-  --accent-foreground: oklch(0.90 0.01 90);
-  --destructive: oklch(0.55 0.20 25);
+  --accent: oklch(0.3 0.06 260);
+  --accent-foreground: oklch(0.9 0.01 90);
+  --destructive: oklch(0.55 0.2 25);
   --destructive-foreground: oklch(0.98 0.005 90);
-  --border: oklch(0.30 0.03 260);
-  --input: oklch(0.30 0.03 260);
+  --border: oklch(0.3 0.03 260);
+  --input: oklch(0.3 0.03 260);
   --ring: oklch(0.75 0.12 85);
 }
 
@@ -92,18 +92,33 @@
 }
 
 @keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slide-up {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes glow {
-  0%, 100% { box-shadow: 0 0 8px oklch(0.75 0.12 85 / 0.4); }
-  50% { box-shadow: 0 0 20px oklch(0.75 0.12 85 / 0.7); }
+  0%,
+  100% {
+    box-shadow: 0 0 8px oklch(0.75 0.12 85 / 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px oklch(0.75 0.12 85 / 0.7);
+  }
 }
 
 html {

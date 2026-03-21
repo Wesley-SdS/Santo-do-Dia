@@ -1,6 +1,6 @@
+import { MAX_DONATION_CENTS, MIN_DONATION_CENTS } from '@/constants';
 import { ValidationError } from '@/lib/errors';
 import { createChildLogger } from '@/lib/logger';
-import { MIN_DONATION_CENTS, MAX_DONATION_CENTS } from '@/constants';
 import * as donationsRepo from './donations.repository';
 import type { CreateDonationInput, PixCharge } from './donations.types';
 
@@ -11,13 +11,19 @@ function validateAmount(amountCents: number): number {
     throw new ValidationError('Valor mínimo é R$ 1,00', { amountCents, min: MIN_DONATION_CENTS });
   }
   if (amountCents > MAX_DONATION_CENTS) {
-    throw new ValidationError('Valor máximo é R$ 10.000,00', { amountCents, max: MAX_DONATION_CENTS });
+    throw new ValidationError('Valor máximo é R$ 10.000,00', {
+      amountCents,
+      max: MAX_DONATION_CENTS,
+    });
   }
   return amountCents;
 }
 
 export async function createDonation(input: CreateDonationInput) {
-  const operationLogger = logger.child({ operation: 'createDonation', amountCents: input.amountCents });
+  const operationLogger = logger.child({
+    operation: 'createDonation',
+    amountCents: input.amountCents,
+  });
   operationLogger.info('Creating donation');
 
   const validatedAmount = validateAmount(input.amountCents);

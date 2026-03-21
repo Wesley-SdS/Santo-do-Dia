@@ -1,5 +1,5 @@
-import { SaintCard } from './saint-card';
 import { prisma } from '@/lib/db';
+import { SaintCard } from './saint-card';
 
 async function getSaintOfTheDay() {
   const now = new Date();
@@ -44,9 +44,7 @@ export async function SaintOfDayHero() {
 
   return (
     <div>
-      <p className="mb-3 text-sm font-medium text-muted-foreground">
-        Santo do Dia
-      </p>
+      <p className="mb-3 text-sm font-medium text-muted-foreground">Santo do Dia</p>
       <SaintCard
         id={saint.id}
         name={saint.name}

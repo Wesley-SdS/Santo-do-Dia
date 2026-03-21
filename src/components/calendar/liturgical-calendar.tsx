@@ -1,11 +1,21 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const MONTH_NAMES = [
-  'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-  'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro',
+  'Janeiro',
+  'Fevereiro',
+  'Março',
+  'Abril',
+  'Maio',
+  'Junho',
+  'Julho',
+  'Agosto',
+  'Setembro',
+  'Outubro',
+  'Novembro',
+  'Dezembro',
 ];
 
 const DAY_NAMES = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
@@ -93,10 +103,7 @@ export function LiturgicalCalendar() {
         {/* Day Headers */}
         <div className="grid grid-cols-7 gap-1">
           {DAY_NAMES.map((day) => (
-            <div
-              key={day}
-              className="p-2 text-center text-xs font-medium text-muted-foreground"
-            >
+            <div key={day} className="p-2 text-center text-xs font-medium text-muted-foreground">
               {day}
             </div>
           ))}

@@ -1,10 +1,10 @@
 'use client';
 
-import Link from 'next/link';
 import { Menu, Search } from 'lucide-react';
+import Link from 'next/link';
 import { useState } from 'react';
-import { Sidebar } from './sidebar';
 import { UserMenu } from '@/components/auth/user-menu';
+import { Sidebar } from './sidebar';
 
 export function Header() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -24,9 +24,7 @@ export function Header() {
 
           <Link href="/" className="flex items-center gap-2">
             <img src="/images/fsjpii-logo.png" alt="FSJPII" className="h-8 w-8" />
-            <span className="font-[family-name:var(--font-dm-serif)] text-xl text-gold">
-              Santo
-            </span>
+            <span className="font-[family-name:var(--font-dm-serif)] text-xl text-gold">Santo</span>
             <span className="font-[family-name:var(--font-dm-serif)] text-xl text-foreground">
               Dia
             </span>

@@ -1,9 +1,9 @@
 'use client';
 
+import { ArrowLeft, Eye, EyeOff, Loader2 } from 'lucide-react';
+import Link from 'next/link';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
-import { Loader2, Eye, EyeOff, ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
 
 export function RegisterForm() {
   const [name, setName] = useState('');

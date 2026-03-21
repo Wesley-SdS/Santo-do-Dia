@@ -1,5 +1,5 @@
-import { prisma } from '@/lib/db';
 import type { YearlyDevotion } from '@prisma/client';
+import { prisma } from '@/lib/db';
 import type { DevotionWithSaint } from './devotion.types';
 
 export async function findDevotionByUserAndYear(

@@ -1,8 +1,8 @@
+import type { Saint } from '@prisma/client';
 import { NotFoundError } from '@/lib/errors';
 import { createChildLogger } from '@/lib/logger';
-import type { Saint } from '@prisma/client';
-import type { SaintSearchParams } from './saints.types';
 import * as saintsRepo from './saints.repository';
+import type { SaintSearchParams } from './saints.types';
 
 const logger = createChildLogger({ module: 'saints.service' });
 

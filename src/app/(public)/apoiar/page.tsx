@@ -6,7 +6,8 @@ export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'Apoiar o SantoDia',
-  description: 'Apoie o SantoDia com uma doação via Pix. 100% gratuito, sustentado pela comunidade.',
+  description:
+    'Apoie o SantoDia com uma doação via Pix. 100% gratuito, sustentado pela comunidade.',
 };
 
 export default function ApoiarPage() {
@@ -17,8 +18,8 @@ export default function ApoiarPage() {
           Apoiar o SantoDia
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          O SantoDia é 100% gratuito e sem anúncios. Sua doação ajuda a manter
-          o app funcionando e leva a vida dos santos a milhares de católicos.
+          O SantoDia é 100% gratuito e sem anúncios. Sua doação ajuda a manter o app funcionando e
+          leva a vida dos santos a milhares de católicos.
         </p>
       </div>
 

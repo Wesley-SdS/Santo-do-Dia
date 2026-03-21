@@ -1,9 +1,9 @@
 'use client';
 
+import { Eye, EyeOff, Loader2, Mail, UserPlus } from 'lucide-react';
+import Link from 'next/link';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
-import { Mail, Loader2, Eye, EyeOff, UserPlus } from 'lucide-react';
-import Link from 'next/link';
 
 export function LoginForm() {
   const [email, setEmail] = useState('');

@@ -1,7 +1,7 @@
 'use client';
 
+import { Check, Copy, Heart, QrCode } from 'lucide-react';
 import { useState } from 'react';
-import { Heart, Copy, Check, QrCode } from 'lucide-react';
 
 const QUICK_VALUES = [
   { cents: 500, label: 'R$ 5' },
@@ -59,16 +59,18 @@ export function DonationForm() {
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gold/20">
           <Heart className="h-8 w-8 text-gold" />
         </div>
-        <h3 className="mt-4 font-[family-name:var(--font-dm-serif)] text-xl">
-          Deus lhe pague!
-        </h3>
+        <h3 className="mt-4 font-[family-name:var(--font-dm-serif)] text-xl">Deus lhe pague!</h3>
         <p className="mt-2 text-sm text-white/80">
-          Sua doação ajuda a levar a vida dos santos a milhares de católicos.
-          Que o santo do dia interceda por você e sua família.
+          Sua doação ajuda a levar a vida dos santos a milhares de católicos. Que o santo do dia
+          interceda por você e sua família.
         </p>
         <button
           type="button"
-          onClick={() => { setStep('select'); setSelectedAmount(null); setCustomAmount(''); }}
+          onClick={() => {
+            setStep('select');
+            setSelectedAmount(null);
+            setCustomAmount('');
+          }}
           className="mt-6 rounded-xl bg-gold px-6 py-2.5 text-sm font-medium text-primary-foreground"
         >
           Fazer outra doação
@@ -83,7 +85,9 @@ export function DonationForm() {
         <div className="text-center">
           <p className="text-sm text-muted-foreground">Doação de</p>
           <p className="font-[family-name:var(--font-dm-serif)] text-2xl text-foreground">
-            {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(amountCents / 100)}
+            {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(
+              amountCents / 100,
+            )}
           </p>
         </div>
 
@@ -113,9 +117,7 @@ export function DonationForm() {
           </div>
         </div>
 
-        <p className="mt-4 text-center text-xs text-muted-foreground">
-          Expira em 30 minutos
-        </p>
+        <p className="mt-4 text-center text-xs text-muted-foreground">Expira em 30 minutos</p>
 
         <div className="mt-4 flex gap-3">
           <button
@@ -139,9 +141,7 @@ export function DonationForm() {
 
   return (
     <div className="rounded-2xl bg-card p-6 shadow-lg">
-      <h3 className="text-center text-sm font-medium text-foreground">
-        Escolha um valor
-      </h3>
+      <h3 className="text-center text-sm font-medium text-foreground">Escolha um valor</h3>
 
       {/* Quick Values */}
       <div className="mt-4 grid grid-cols-4 gap-2">
@@ -149,7 +149,10 @@ export function DonationForm() {
           <button
             key={cents}
             type="button"
-            onClick={() => { setSelectedAmount(cents); setCustomAmount(''); }}
+            onClick={() => {
+              setSelectedAmount(cents);
+              setCustomAmount('');
+            }}
             className={`rounded-xl border px-3 py-3 text-sm font-medium transition-all ${
               selectedAmount === cents
                 ? 'border-gold bg-gold/10 text-gold'
@@ -178,7 +181,10 @@ export function DonationForm() {
             step="0.01"
             placeholder="0,00"
             value={customAmount}
-            onChange={(e) => { setCustomAmount(e.target.value); setSelectedAmount(null); }}
+            onChange={(e) => {
+              setCustomAmount(e.target.value);
+              setSelectedAmount(null);
+            }}
             className="w-full rounded-xl border border-input bg-background py-2.5 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
           />
         </div>
