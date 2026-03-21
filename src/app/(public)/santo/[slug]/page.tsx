@@ -69,12 +69,12 @@ export default async function SaintPage({ params }: SaintPageProps) {
       </div>
 
       {/* Hero Image */}
-      <div className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-gradient-to-br from-gold/20 to-deep-blue/10">
+      <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-gradient-to-br from-gold/20 to-deep-blue/10">
         {saint.imageUrl ? (
           <img
             src={saint.imageUrl}
             alt={saint.name}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover object-top"
             loading="eager"
           />
         ) : (
@@ -84,8 +84,7 @@ export default async function SaintPage({ params }: SaintPageProps) {
             </span>
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-        {/* Name overlay on image */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-5">
           <span className="rounded-full bg-gold/90 px-3 py-1 text-xs font-medium text-primary-foreground">
             {categoryLabel}

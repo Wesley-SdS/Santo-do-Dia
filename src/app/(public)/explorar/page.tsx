@@ -15,9 +15,16 @@ interface ExplorarPageProps {
   searchParams: Promise<{
     q?: string;
     category?: string;
-    country?: string;
     page?: string;
   }>;
+}
+
+function normalizeSearch(text: string): string {
+  return text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim();
 }
 
 export default async function ExplorarPage({ searchParams }: ExplorarPageProps) {
@@ -30,9 +37,14 @@ export default async function ExplorarPage({ searchParams }: ExplorarPageProps) 
   const where: Record<string, unknown> = {};
 
   if (query) {
+    const normalized = normalizeSearch(query);
+    // Search by slug (accent-free) and by name/biography (with accents)
     where.OR = [
+      { slug: { contains: normalized, mode: 'insensitive' } },
       { name: { contains: query, mode: 'insensitive' } },
       { biographyShort: { contains: query, mode: 'insensitive' } },
+      { patronage: { has: query } },
+      { country: { contains: query, mode: 'insensitive' } },
     ];
   }
 
@@ -65,12 +77,14 @@ export default async function ExplorarPage({ searchParams }: ExplorarPageProps) 
 
   return (
     <div className="mx-auto max-w-5xl px-4 pb-24 pt-6">
-      <h1 className="font-[family-name:var(--font-dm-serif)] text-2xl text-foreground">
-        Explorar Santos
-      </h1>
-      <p className="mt-1 text-sm text-muted-foreground">
-        {total} santos encontrados
-      </p>
+      <div className="flex items-baseline justify-between">
+        <h1 className="font-[family-name:var(--font-dm-serif)] text-2xl text-foreground">
+          Explorar Santos
+        </h1>
+        <p className="text-sm text-muted-foreground">
+          {total} {total === 1 ? 'santo' : 'santos'}
+        </p>
+      </div>
 
       <SaintSearchForm initialQuery={query} initialCategory={category} />
 
@@ -78,7 +92,10 @@ export default async function ExplorarPage({ searchParams }: ExplorarPageProps) 
         <div className="mt-12 text-center">
           <Search className="mx-auto h-12 w-12 text-muted-foreground/30" />
           <p className="mt-4 text-muted-foreground">
-            Nenhum santo encontrado para esta busca.
+            Nenhum santo encontrado para &ldquo;{query}&rdquo;
+          </p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            Tente buscar por nome, país ou patronato
           </p>
         </div>
       ) : (
@@ -89,7 +106,6 @@ export default async function ExplorarPage({ searchParams }: ExplorarPageProps) 
             ))}
           </div>
 
-          {/* Pagination */}
           {totalPages > 1 && (
             <div className="mt-8 flex items-center justify-center gap-2">
               {Array.from({ length: totalPages }, (_, i) => i + 1)
@@ -100,7 +116,7 @@ export default async function ExplorarPage({ searchParams }: ExplorarPageProps) 
                     <span key={p}>
                       {showEllipsis && <span className="px-1 text-muted-foreground">...</span>}
                       <a
-                        href={`/explorar?q=${query}&category=${category}&page=${p}`}
+                        href={`/explorar?q=${encodeURIComponent(query)}&category=${category}&page=${p}`}
                         className={`inline-flex h-9 w-9 items-center justify-center rounded-lg text-sm transition-colors ${
                           p === page
                             ? 'bg-gold text-primary-foreground'

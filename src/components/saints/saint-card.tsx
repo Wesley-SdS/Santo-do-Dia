@@ -47,7 +47,7 @@ export function SaintCard({
               <img
                 src={imageUrl}
                 alt={name}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover object-top"
               />
             ) : (
               <div className="flex h-full w-full items-center justify-center">
@@ -56,9 +56,7 @@ export function SaintCard({
                 </span>
               </div>
             )}
-            {/* Gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-            {/* Category badge */}
             <span className="absolute left-4 top-4 rounded-full bg-gold/90 px-3 py-1 text-xs font-medium text-primary-foreground">
               {categoryLabel}
             </span>
@@ -122,7 +120,7 @@ export function SaintCard({
             <img
               src={imageUrl}
               alt={name}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover object-top"
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center">

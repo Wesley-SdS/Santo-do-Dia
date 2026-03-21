@@ -1,7 +1,9 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Calendar, Compass, Sparkles } from 'lucide-react';
+import { ArrowRight, Calendar, Compass, Sparkles, Heart } from 'lucide-react';
 import { SaintOfDayHero } from '@/components/saints/saint-of-day-hero';
+import { JPIISection } from '@/components/home/jpii-section';
+import { FSJPIISection } from '@/components/home/fsjpii-section';
 
 export const dynamic = 'force-dynamic';
 
@@ -16,33 +18,42 @@ export default function HomePage() {
       </section>
 
       {/* Quick Actions */}
-      <section className="mt-8 grid grid-cols-3 gap-3">
+      <section className="mt-8 grid grid-cols-4 gap-2">
         <Link
           href="/meu-santo"
-          className="flex flex-col items-center gap-2 rounded-xl bg-card p-4 text-center shadow-sm transition-shadow hover:shadow-md"
+          className="flex flex-col items-center gap-1.5 rounded-xl bg-card p-3 text-center shadow-sm transition-shadow hover:shadow-md"
         >
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold/10">
             <Sparkles className="h-5 w-5 text-gold" />
           </div>
-          <span className="text-xs font-medium text-foreground">Meu Santo</span>
+          <span className="text-[11px] font-medium text-foreground">Meu Santo</span>
         </Link>
         <Link
           href="/calendario"
-          className="flex flex-col items-center gap-2 rounded-xl bg-card p-4 text-center shadow-sm transition-shadow hover:shadow-md"
+          className="flex flex-col items-center gap-1.5 rounded-xl bg-card p-3 text-center shadow-sm transition-shadow hover:shadow-md"
         >
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-liturgical-green/10">
             <Calendar className="h-5 w-5 text-liturgical-green" />
           </div>
-          <span className="text-xs font-medium text-foreground">Calendário</span>
+          <span className="text-[11px] font-medium text-foreground">Calendário</span>
         </Link>
         <Link
           href="/explorar"
-          className="flex flex-col items-center gap-2 rounded-xl bg-card p-4 text-center shadow-sm transition-shadow hover:shadow-md"
+          className="flex flex-col items-center gap-1.5 rounded-xl bg-card p-3 text-center shadow-sm transition-shadow hover:shadow-md"
         >
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-deep-blue/10">
             <Compass className="h-5 w-5 text-deep-blue" />
           </div>
-          <span className="text-xs font-medium text-foreground">Explorar</span>
+          <span className="text-[11px] font-medium text-foreground">Explorar</span>
+        </Link>
+        <Link
+          href="/apoiar"
+          className="flex flex-col items-center gap-1.5 rounded-xl bg-card p-3 text-center shadow-sm transition-shadow hover:shadow-md"
+        >
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold/10">
+            <Heart className="h-5 w-5 text-gold" />
+          </div>
+          <span className="text-[11px] font-medium text-foreground">Apoiar</span>
         </Link>
       </section>
 
@@ -50,17 +61,22 @@ export default function HomePage() {
       <section className="mt-8">
         <div className="rounded-2xl bg-gradient-to-br from-deep-blue to-deep-blue/80 p-6 text-white">
           <p className="font-[family-name:var(--font-dm-serif)] text-lg italic leading-relaxed">
-            &ldquo;Não tenhas medo. Eu estou contigo. Daqui quero iluminar. Arrepende-te dos
-            pecados.&rdquo;
+            &ldquo;Não tenham medo! Abram, abram de par em par as portas a Cristo!&rdquo;
           </p>
           <p className="mt-3 text-sm text-gold-light">
-            — Nossa Senhora de Fátima
+            — São João Paulo II, 22 de outubro de 1978
           </p>
         </div>
       </section>
 
+      {/* São João Paulo II - Seção Dedicada */}
+      <JPIISection />
+
+      {/* Fraternidade São João Paulo II */}
+      <FSJPIISection />
+
       {/* CTA Doação */}
-      <section className="mt-8">
+      <section className="mt-10">
         <Link
           href="/apoiar"
           className="group flex items-center justify-between rounded-xl border border-gold/20 bg-gold/5 p-4 transition-colors hover:bg-gold/10"
