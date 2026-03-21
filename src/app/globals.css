@@ -65,10 +65,14 @@
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
 
+  /* FSJPII Palette */
   --color-gold: oklch(0.75 0.12 85);
   --color-gold-light: oklch(0.85 0.08 85);
   --color-gold-dark: oklch(0.60 0.14 85);
-  --color-deep-blue: oklch(0.25 0.08 260);
+  --color-deep-blue: hsl(215 56% 26%);
+  --color-deep-blue-light: hsl(215 46% 36%);
+  --color-burgundy: hsl(348 56% 27%);
+  --color-burgundy-light: hsl(348 46% 37%);
   --color-cream: oklch(0.97 0.01 90);
   --color-warm-gray: oklch(0.55 0.02 70);
 

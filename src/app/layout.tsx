@@ -42,8 +42,8 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Fraternidade São João Paulo II' }],
   icons: {
-    icon: '/favicon.svg',
-    apple: '/favicon.svg',
+    icon: '/images/fsjpii-logo.png',
+    apple: '/images/fsjpii-logo.png',
   },
   manifest: '/manifest.json',
   openGraph: {

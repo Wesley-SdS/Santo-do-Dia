@@ -97,7 +97,7 @@ export function JPIISection() {
       <div className="overflow-hidden rounded-2xl bg-card shadow-lg">
         <div className="relative aspect-[2/1] bg-gradient-to-br from-gold/20 to-deep-blue/20">
           <img
-            src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Ioannes_Paulus_II%2C_1993.jpg"
+            src="/images/sjpii-hero.webp"
             alt="São João Paulo II"
             className="h-full w-full object-cover object-top"
           />

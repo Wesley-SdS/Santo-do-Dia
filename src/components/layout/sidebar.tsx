@@ -66,7 +66,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         {/* Header */}
         <div className="flex items-center justify-between border-b border-border p-4">
           <div className="flex items-center gap-2">
-            <img src="/favicon.svg" alt="FSJPII" className="h-7 w-7" />
+            <img src="/images/fsjpii-logo.png" alt="FSJPII" className="h-8 w-8" />
             <div>
               <span className="font-[family-name:var(--font-dm-serif)] text-xl text-gold">
                 Santo

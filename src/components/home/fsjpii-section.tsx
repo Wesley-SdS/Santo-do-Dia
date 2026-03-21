@@ -21,8 +21,8 @@ export function FSJPIISection() {
       <div className="rounded-2xl bg-gradient-to-br from-deep-blue via-deep-blue to-deep-blue/90 p-6 text-white">
         {/* Header */}
         <div className="flex items-start gap-4">
-          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gold/20">
-            <img src="/favicon.svg" alt="FSJPII" className="h-8 w-8" />
+          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-white/10 overflow-hidden">
+            <img src="/images/fsjpii-logo.png" alt="FSJPII" className="h-12 w-12 object-contain" />
           </div>
           <div>
             <p className="font-[family-name:var(--font-dm-serif)] text-lg">
