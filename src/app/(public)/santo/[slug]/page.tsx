@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, Calendar, MapPin, BookOpen, Heart } from 'lucide-react';
+import { ArrowLeft, Calendar, MapPin, BookOpen, Heart, Play, ExternalLink, Globe } from 'lucide-react';
 import { prisma } from '@/lib/db';
 import { SAINT_CATEGORIES_PT } from '@/constants';
 
@@ -35,6 +35,15 @@ const MONTH_NAMES = [
   'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro',
 ];
 
+interface VideoData {
+  videoId: string;
+  title: string;
+  thumbnailUrl?: string;
+  channelTitle?: string;
+  watchUrl: string;
+  embedUrl: string;
+}
+
 export default async function SaintPage({ params }: SaintPageProps) {
   const { slug } = await params;
   const saint = await getSaint(slug);
@@ -44,6 +53,7 @@ export default async function SaintPage({ params }: SaintPageProps) {
   const categoryLabel =
     SAINT_CATEGORIES_PT[saint.category as keyof typeof SAINT_CATEGORIES_PT] ?? saint.category;
   const feastDate = `${saint.feastDay} de ${MONTH_NAMES[saint.feastMonth - 1]}`;
+  const videos = (saint.videos ?? []) as VideoData[];
 
   return (
     <div className="mx-auto max-w-3xl px-4 pb-24">
@@ -65,6 +75,7 @@ export default async function SaintPage({ params }: SaintPageProps) {
             src={saint.imageUrl}
             alt={saint.name}
             className="h-full w-full object-cover"
+            loading="eager"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center">
@@ -74,46 +85,50 @@ export default async function SaintPage({ params }: SaintPageProps) {
           </div>
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+        {/* Name overlay on image */}
+        <div className="absolute bottom-0 left-0 right-0 p-5">
+          <span className="rounded-full bg-gold/90 px-3 py-1 text-xs font-medium text-primary-foreground">
+            {categoryLabel}
+          </span>
+          <h1 className="mt-2 font-[family-name:var(--font-dm-serif)] text-3xl text-white drop-shadow-lg">
+            {saint.name}
+          </h1>
+        </div>
       </div>
 
-      {/* Saint Info */}
-      <div className="mt-6">
-        <span className="rounded-full bg-gold/10 px-3 py-1 text-xs font-medium text-gold">
-          {categoryLabel}
+      {/* Meta Info */}
+      <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+        <span className="flex items-center gap-1.5">
+          <Calendar className="h-4 w-4 text-gold" />
+          Festa: {feastDate}
         </span>
-        <h1 className="mt-3 font-[family-name:var(--font-dm-serif)] text-3xl text-foreground">
-          {saint.name}
-        </h1>
-
-        <div className="mt-3 flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+        {saint.country && (
           <span className="flex items-center gap-1.5">
-            <Calendar className="h-4 w-4" />
-            Festa: {feastDate}
+            <MapPin className="h-4 w-4" />
+            {saint.country}
           </span>
-          {saint.country && (
-            <span className="flex items-center gap-1.5">
-              <MapPin className="h-4 w-4" />
-              {saint.country}
-            </span>
-          )}
-          {saint.century && (
-            <span className="flex items-center gap-1.5">
-              <BookOpen className="h-4 w-4" />
-              Século {saint.century}
-            </span>
-          )}
-        </div>
+        )}
+        {saint.century && (
+          <span className="flex items-center gap-1.5">
+            <BookOpen className="h-4 w-4" />
+            Século {Math.abs(saint.century)}{saint.century < 0 ? ' a.C.' : ''}
+          </span>
+        )}
+        {saint.birthDate && saint.deathDate && (
+          <span className="text-xs text-muted-foreground/70">
+            {saint.birthDate} — {saint.deathDate}
+          </span>
+        )}
       </div>
 
       {/* Patronage */}
       {saint.patronage.length > 0 && (
-        <div className="mt-6">
-          <h2 className="text-sm font-semibold text-foreground">Patronato</h2>
-          <div className="mt-2 flex flex-wrap gap-2">
+        <div className="mt-5">
+          <div className="flex flex-wrap gap-2">
             {saint.patronage.map((p) => (
               <span
                 key={p}
-                className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground"
+                className="rounded-full bg-gold/10 px-3 py-1 text-xs font-medium text-gold"
               >
                 {p}
               </span>
@@ -127,11 +142,23 @@ export default async function SaintPage({ params }: SaintPageProps) {
         <h2 className="font-[family-name:var(--font-dm-serif)] text-xl text-foreground">
           Biografia
         </h2>
-        <div className="mt-4 space-y-4 font-[family-name:var(--font-inter)] text-sm leading-relaxed text-foreground/80">
+        <div className="mt-4 space-y-4 font-[family-name:var(--font-inter)] text-[15px] leading-[1.8] text-foreground/80">
           {saint.biographyFull.split('\n\n').map((paragraph, i) => (
             <p key={i}>{paragraph}</p>
           ))}
         </div>
+        {saint.wikipediaUrl && (
+          <a
+            href={saint.wikipediaUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-gold transition-colors"
+          >
+            <Globe className="h-3.5 w-3.5" />
+            Ler mais na Wikipedia
+            <ExternalLink className="h-3 w-3" />
+          </a>
+        )}
       </article>
 
       {/* Quotes */}
@@ -146,7 +173,7 @@ export default async function SaintPage({ params }: SaintPageProps) {
                 key={i}
                 className="rounded-xl border-l-4 border-gold bg-gold/5 p-4"
               >
-                <p className="font-[family-name:var(--font-dm-serif)] text-sm italic text-foreground">
+                <p className="font-[family-name:var(--font-dm-serif)] text-[15px] italic leading-relaxed text-foreground">
                   &ldquo;{quote.text}&rdquo;
                 </p>
                 {quote.source && (
@@ -167,12 +194,52 @@ export default async function SaintPage({ params }: SaintPageProps) {
             Oração
           </h2>
           <div className="mt-4 rounded-2xl bg-gradient-to-br from-deep-blue to-deep-blue/90 p-6 text-white">
-            <div className="space-y-3 text-sm leading-relaxed">
+            <div className="space-y-3 text-[15px] leading-relaxed">
               {saint.prayer.split('\n\n').map((paragraph, i) => (
                 <p key={i}>{paragraph}</p>
               ))}
             </div>
             <p className="mt-4 text-right text-sm text-gold-light">Amém.</p>
+          </div>
+        </section>
+      )}
+
+      {/* Videos */}
+      {videos.length > 0 && (
+        <section className="mt-8">
+          <h2 className="font-[family-name:var(--font-dm-serif)] text-xl text-foreground">
+            Vídeos
+          </h2>
+          <div className="mt-4 space-y-4">
+            {videos.map((video) => (
+              <a
+                key={video.videoId}
+                href={video.watchUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-start gap-4 rounded-xl bg-card p-3 shadow-sm transition-all hover:shadow-md"
+              >
+                <div className="relative shrink-0 overflow-hidden rounded-lg">
+                  <img
+                    src={video.thumbnailUrl ?? `https://i.ytimg.com/vi/${video.videoId}/mqdefault.jpg`}
+                    alt={video.title}
+                    className="h-20 w-36 object-cover"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
+                    <Play className="h-8 w-8 text-white drop-shadow" fill="white" />
+                  </div>
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="line-clamp-2 text-sm font-medium text-foreground group-hover:text-gold transition-colors">
+                    {video.title}
+                  </p>
+                  {video.channelTitle && (
+                    <p className="mt-1 text-xs text-muted-foreground">{video.channelTitle}</p>
+                  )}
+                </div>
+              </a>
+            ))}
           </div>
         </section>
       )}

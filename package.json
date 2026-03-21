@@ -18,7 +18,11 @@
     "db:migrate": "prisma migrate dev",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
-    "db:studio": "prisma studio"
+    "db:studio": "prisma studio",
+    "enrich": "tsx scripts/enrich-saints.ts",
+    "enrich:images": "tsx scripts/enrich-saints.ts --images-only",
+    "enrich:bio": "tsx scripts/enrich-saints.ts --bio-only",
+    "enrich:dry": "tsx scripts/enrich-saints.ts --dry-run"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.5.0",

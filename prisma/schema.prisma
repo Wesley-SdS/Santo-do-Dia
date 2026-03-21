@@ -72,6 +72,8 @@ model Saint {
   novena         Json?
   imageUrl       String?
   imageKidsUrl   String?
+  videos         Json[]
+  wikipediaUrl   String?
   latitude       Decimal?
   longitude      Decimal?
   // embedding   Unsupported("vector(1536)")?
