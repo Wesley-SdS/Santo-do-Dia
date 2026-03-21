@@ -1,4 +1,6 @@
+import { Compass } from 'lucide-react';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { DrawCeremony } from '@/components/devotion/draw-ceremony';
 
 export const metadata: Metadata = {
@@ -19,6 +21,14 @@ export default function MeuSantoPage() {
       <div className="mt-8">
         <DrawCeremony />
       </div>
+
+      <Link
+        href="/meu-santo/jornada"
+        className="mt-6 flex items-center justify-center gap-2 rounded-xl bg-deep-blue/10 px-4 py-3 text-sm font-medium text-deep-blue transition-colors hover:bg-deep-blue/20"
+      >
+        <Compass className="h-4 w-4" />
+        Minha Jornada Anual
+      </Link>
     </div>
   );
 }

@@ -1,8 +1,8 @@
+import { getRandomSaintForDraw } from '@/features/saints';
 import { NotFoundError, ValidationError } from '@/lib/errors';
 import { createChildLogger } from '@/lib/logger';
-import { getRandomSaintForDraw } from '@/features/saints';
 import * as devotionRepo from './devotion.repository';
-import type { DevotionWithSaint, DevotionProgress } from './devotion.types';
+import type { DevotionProgress, DevotionWithSaint } from './devotion.types';
 
 const logger = createChildLogger({ module: 'devotion.service' });
 
@@ -62,8 +62,63 @@ export async function markWeekAsRead(userId: string, week: number): Promise<void
     progress.weeksRead.push(week);
   }
 
-  await devotionRepo.updateDevotionProgress(devotion.id, progress as unknown as Record<string, unknown>);
+  await devotionRepo.updateDevotionProgress(
+    devotion.id,
+    progress as unknown as Record<string, unknown>,
+  );
   logger.info({ userId, week }, 'Week marked as read');
+}
+
+export async function completeChallenge(userId: string, month: number): Promise<void> {
+  const year = new Date().getFullYear();
+  const devotion = await devotionRepo.findDevotionByUserAndYear(userId, year);
+
+  if (!devotion) {
+    throw new NotFoundError('Nenhuma devoção encontrada para este ano');
+  }
+
+  const progress = (devotion.progress as unknown as DevotionProgress) ?? {
+    weeksRead: [],
+    challengesCompleted: [],
+    novenaDone: false,
+  };
+
+  if (!progress.challengesCompleted) {
+    progress.challengesCompleted = [];
+  }
+
+  if (!progress.challengesCompleted.includes(month)) {
+    progress.challengesCompleted.push(month);
+  }
+
+  await devotionRepo.updateDevotionProgress(
+    devotion.id,
+    progress as unknown as Record<string, unknown>,
+  );
+  logger.info({ userId, month }, 'Challenge completed');
+}
+
+export async function completeNovena(userId: string): Promise<void> {
+  const year = new Date().getFullYear();
+  const devotion = await devotionRepo.findDevotionByUserAndYear(userId, year);
+
+  if (!devotion) {
+    throw new NotFoundError('Nenhuma devoção encontrada para este ano');
+  }
+
+  const progress = (devotion.progress as unknown as DevotionProgress) ?? {
+    weeksRead: [],
+    challengesCompleted: [],
+    novenaDone: false,
+  };
+
+  progress.novenaDone = true;
+
+  await devotionRepo.updateDevotionProgress(
+    devotion.id,
+    progress as unknown as Record<string, unknown>,
+  );
+  logger.info({ userId }, 'Novena completed');
 }
 
 function getVirtueForSaint(category: string): string {
