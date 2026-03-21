@@ -1,7 +1,7 @@
-import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
-const AUTH_ROUTES = ['/perfil', '/diario', '/meu-santo'];
+const AUTH_ROUTES = ['/perfil', '/diario', '/meu-santo', '/comunidade'];
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -26,5 +26,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/perfil/:path*', '/diario/:path*', '/meu-santo/:path*'],
+  matcher: ['/perfil/:path*', '/diario/:path*', '/meu-santo/:path*', '/comunidade/:path*'],
 };
