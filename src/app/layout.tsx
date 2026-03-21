@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { DM_Sans, DM_Serif_Display, Inter } from 'next/font/google';
 import { ThemeProvider } from '@/components/common/theme-provider';
+import { SessionProvider } from '@/components/auth/session-provider';
 import { Header } from '@/components/layout/header';
 import { BottomNav } from '@/components/layout/bottom-nav';
 import './globals.css';
@@ -79,18 +80,20 @@ export default function RootLayout({
       className={`${dmSans.variable} ${dmSerif.variable} ${inter.variable}`}
     >
       <body className="min-h-dvh bg-background text-foreground antialiased">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className="flex min-h-dvh flex-col">
-            <Header />
-            <main className="flex-1">{children}</main>
-            <BottomNav />
-          </div>
-        </ThemeProvider>
+        <SessionProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div className="flex min-h-dvh flex-col">
+              <Header />
+              <main className="flex-1">{children}</main>
+              <BottomNav />
+            </div>
+          </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   );

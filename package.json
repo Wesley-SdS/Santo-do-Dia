@@ -25,6 +25,7 @@
     "enrich:dry": "tsx scripts/enrich-saints.ts --dry-run"
   },
   "dependencies": {
+    "@auth/prisma-adapter": "^2.11.1",
     "@prisma/adapter-pg": "^7.5.0",
     "@prisma/client": "^7.5.0",
     "class-variance-authority": "^0.7.1",
@@ -33,6 +34,7 @@
     "framer-motion": "^12.38.0",
     "lucide-react": "^0.577.0",
     "next": "16.2.1",
+    "next-auth": "5.0.0-beta.30",
     "next-themes": "^0.4.6",
     "pg": "^8.20.0",
     "pino": "^10.3.1",

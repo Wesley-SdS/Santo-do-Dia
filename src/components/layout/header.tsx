@@ -1,9 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { Menu, Heart, Search } from 'lucide-react';
+import { Menu, Search } from 'lucide-react';
 import { useState } from 'react';
 import { Sidebar } from './sidebar';
+import { UserMenu } from '@/components/auth/user-menu';
 
 export function Header() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -39,13 +40,7 @@ export function Header() {
             >
               <Search className="h-5 w-5" />
             </Link>
-            <Link
-              href="/apoiar"
-              className="rounded-lg p-2 text-gold transition-colors hover:bg-gold/10"
-              aria-label="Apoiar o SantoDia"
-            >
-              <Heart className="h-5 w-5" />
-            </Link>
+            <UserMenu />
           </div>
         </div>
       </header>

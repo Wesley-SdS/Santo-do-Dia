@@ -53,7 +53,7 @@ export default async function SaintPage({ params }: SaintPageProps) {
   const categoryLabel =
     SAINT_CATEGORIES_PT[saint.category as keyof typeof SAINT_CATEGORIES_PT] ?? saint.category;
   const feastDate = `${saint.feastDay} de ${MONTH_NAMES[saint.feastMonth - 1]}`;
-  const videos = (saint.videos ?? []) as VideoData[];
+  const videos = (saint.videos ?? []) as unknown as VideoData[];
 
   return (
     <div className="mx-auto max-w-3xl px-4 pb-24">
