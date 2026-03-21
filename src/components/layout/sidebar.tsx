@@ -1,18 +1,23 @@
 'use client';
 
-import Link from 'next/link';
 import {
-  X,
-  Home,
+  Baby,
+  BookOpen,
   Calendar,
   Compass,
-  Sparkles,
-  BookOpen,
-  MessageCircle,
+  Headphones,
   Heart,
-  User,
+  Home,
   Info,
+  MapPin,
+  MessageCircle,
+  Moon,
+  Sparkles,
+  User,
+  Users,
+  X,
 } from 'lucide-react';
+import Link from 'next/link';
 import { useEffect } from 'react';
 
 interface SidebarProps {
@@ -26,7 +31,12 @@ const NAV_ITEMS = [
   { href: '/explorar', icon: Compass, label: 'Explorar Santos' },
   { href: '/meu-santo', icon: Sparkles, label: 'Meu Santo do Ano' },
   { href: '/diario', icon: BookOpen, label: 'Diário Espiritual' },
+  { href: '/mapa', icon: MapPin, label: 'Mapa dos Santos' },
+  { href: '/kids', icon: Baby, label: 'Modo Kids' },
+  { href: '/comunidade', icon: Users, label: 'Comunidade' },
   { href: '/chat', icon: MessageCircle, label: 'Conselheiro IA' },
+  { href: '/audio', icon: Headphones, label: 'Áudio' },
+  { href: '/reflexao', icon: Moon, label: 'Reflexão Noturna' },
   { href: '/perfil', icon: User, label: 'Meu Perfil' },
 ] as const;
 
