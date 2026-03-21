@@ -94,6 +94,7 @@ model User {
   email            String?   @unique
   emailVerified    DateTime?
   image            String?
+  password         String?
   notificationTime String    @default("07:00")
   kidsModePin      String?
   createdAt        DateTime  @default(now())
