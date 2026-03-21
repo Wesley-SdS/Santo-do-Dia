@@ -124,21 +124,45 @@ export function JPIISection() {
           </div>
         </div>
 
-        <div className="p-5">
+        <div className="p-5 space-y-3">
           <p className="text-sm leading-relaxed text-foreground/80">
-            264º Papa da Igreja Católica, Karol Wojtyła foi o primeiro polonês e o primeiro
-            não-italiano em 455 anos a ocupar a Cátedra de Pedro. Seu pontificado de 26 anos
-            (1978-2005) transformou a Igreja e o mundo: viajou por 129 países, canonizou 483
-            santos — mais que todos os predecessores em 5 séculos —, criou as Jornadas Mundiais
-            da Juventude e teve papel decisivo na queda do comunismo na Europa Oriental.
+            Karol Wojtyła nasceu em 1920 na pequena cidade de Wadowice, na Polônia. Perdeu a
+            mãe aos 9 anos e, desde então, encontrou em Nossa Senhora uma mãe espiritual que
+            o acompanharia por toda a vida. Viveu sob a ocupação nazista, trabalhou em pedreiras
+            e fábricas, e estudou no seminário clandestino de Cracóvia. Foi ordenado sacerdote
+            em 1946 e, ao longo dos anos seguintes, tornou-se professor, bispo e cardeal.
           </p>
-          <p className="mt-3 text-sm leading-relaxed text-foreground/80">
+          <p className="text-sm leading-relaxed text-foreground/80">
+            Em 16 de outubro de 1978, aos 58 anos, foi eleito o 264º Papa da Igreja Católica,
+            o primeiro polonês e o primeiro não italiano em mais de quatro séculos. Suas primeiras
+            palavras ao mundo foram uma convocação que ecoaria por todo o seu pontificado:{' '}
+            <em className="text-gold font-medium">&ldquo;Não tenhais medo! Abram de par em par as
+            portas a Cristo!&rdquo;</em>
+          </p>
+          <p className="text-sm leading-relaxed text-foreground/80">
+            Durante 26 anos à frente da Igreja, João Paulo II percorreu 129 países, canonizou
+            483 santos (mais do que todos os papas dos cinco séculos anteriores juntos), criou
+            as Jornadas Mundiais da Juventude e desempenhou um papel decisivo na queda do
+            comunismo na Europa Oriental. Lech Walesa, líder do sindicato Solidariedade,
+            atribuiu a ele 50% da responsabilidade pela queda do Muro de Berlim.
+          </p>
+          <p className="text-sm leading-relaxed text-foreground/80">
             Seu lema papal, <em className="text-gold font-medium">&ldquo;Totus Tuus&rdquo;</em>{' '}
-            (Todo Teu), expressa sua consagração total a Nossa Senhora, inspirada em São Luís
-            Maria Grignion de Montfort. Após perder a mãe aos 9 anos, adotou a Virgem Maria
-            como protetora — devoção que o acompanhou até suas últimas palavras:{' '}
-            <em>&ldquo;Deixai-me ir à casa do Pai.&rdquo;</em> Este mesmo carisma mariano inspira
-            a <strong>Fraternidade São João Paulo II</strong>.
+            (Todo Teu), nasceu da leitura dos escritos de São Luís Maria Grignion de Montfort
+            sobre a consagração total a Nossa Senhora. Essa devoção mariana profunda marcou cada
+            momento de sua vida. Em 13 de maio de 1981, sobreviveu a um atentado na Praça São
+            Pedro, no dia exato de Nossa Senhora de Fátima. Ele mesmo disse:{' '}
+            <em>&ldquo;Foi uma mão que atirou, mas outra mão guiou a bala.&rdquo;</em> No ano
+            seguinte, peregrinando a Fátima, depositou a bala que o atingiu na coroa da Virgem.
+          </p>
+          <p className="text-sm leading-relaxed text-foreground/80">
+            Faleceu em 2 de abril de 2005, na véspera do Domingo da Misericórdia. Suas últimas
+            palavras foram: <em>&ldquo;Deixai-me ir à casa do Pai.&rdquo;</em> Foi canonizado
+            em 27 de abril de 2014 pelo Papa Francisco. Esse mesmo carisma mariano, o{' '}
+            <em className="text-gold font-medium">&ldquo;Totus Tuus Iesu Per Mariam&rdquo;</em>,
+            é o que inspira e dá nome à{' '}
+            <strong>Fraternidade São João Paulo II</strong>, fundada em 2012 pelo Padre Ailton
+            Fernandes Cardoso.
           </p>
         </div>
       </div>
