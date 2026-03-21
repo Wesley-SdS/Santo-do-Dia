@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from 'next';
 import { DM_Sans, DM_Serif_Display, Inter } from 'next/font/google';
-import { ThemeProvider } from '@/components/common/theme-provider';
 import { SessionProvider } from '@/components/auth/session-provider';
-import { Header } from '@/components/layout/header';
+import { ThemeProvider } from '@/components/common/theme-provider';
 import { BottomNav } from '@/components/layout/bottom-nav';
+import { Header } from '@/components/layout/header';
+import { OrganizationJsonLd } from '@/components/seo/organization-jsonld';
 import './globals.css';
 
 const dmSans = DM_Sans({
@@ -43,9 +44,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Fraternidade São João Paulo II' }],
   icons: {
-    icon: [
-      { url: '/images/fsjpii-logo.png', sizes: 'any' },
-    ],
+    icon: [{ url: '/images/fsjpii-logo.png', sizes: 'any' }],
     apple: '/images/fsjpii-logo.png',
   },
   manifest: '/manifest.json',
@@ -80,6 +79,7 @@ export default function RootLayout({
       className={`${dmSans.variable} ${dmSerif.variable} ${inter.variable}`}
     >
       <body className="min-h-dvh bg-background text-foreground antialiased">
+        <OrganizationJsonLd />
         <SessionProvider>
           <ThemeProvider
             attribute="class"
