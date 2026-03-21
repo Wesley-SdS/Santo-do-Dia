@@ -1,0 +1,273 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions", "fullTextSearchPostgres"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  extensions = [pgvector(map: "vector")]
+}
+
+enum SaintCategory {
+  MARTYR
+  CONFESSOR
+  VIRGIN
+  DOCTOR
+  POPE
+  RELIGIOUS
+  LAYPERSON
+  FOUNDER
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum AuthProvider {
+  EMAIL
+  GOOGLE
+  ANONYMOUS
+}
+
+enum DonationStatus {
+  PENDING
+  CONFIRMED
+  RETURNED
+}
+
+enum ChatRole {
+  USER
+  ASSISTANT
+}
+
+enum JournalMood {
+  GRATEFUL
+  REFLECTIVE
+  JOYFUL
+  STRUGGLING
+  PEACEFUL
+}
+
+model Saint {
+  id             String        @id @default(uuid())
+  name           String
+  slug           String        @unique
+  feastMonth     Int
+  feastDay       Int
+  birthDate      String?
+  deathDate      String?
+  birthPlace     String?
+  deathPlace     String?
+  country        String?
+  century        Int?
+  category       SaintCategory
+  gender         Gender
+  patronage      String[]
+  biographyShort String        @db.Text
+  biographyFull  String        @db.Text
+  biographyKids  String?       @db.Text
+  quotes         Json[]
+  prayer         String?       @db.Text
+  novena         Json?
+  imageUrl       String?
+  imageKidsUrl   String?
+  latitude       Decimal?
+  longitude      Decimal?
+  // embedding   Unsupported("vector(1536)")?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  yearlyDevotions YearlyDevotion[]
+  favorites       Favorite[]
+  amens           Amen[]
+  roomMembers     RoomMember[]
+
+  @@index([feastMonth, feastDay])
+  @@index([category])
+  @@index([country])
+  @@index([slug])
+  @@map("saints")
+}
+
+model User {
+  id               String       @id @default(uuid())
+  email            String?      @unique
+  name             String?
+  avatarUrl        String?
+  authProvider     AuthProvider  @default(ANONYMOUS)
+  notificationTime String       @default("07:00")
+  kidsModePin      String?
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  yearlyDevotions  YearlyDevotion[]
+  journalEntries   JournalEntry[]
+  favorites        Favorite[]
+  donations        Donation[]
+  amens            Amen[]
+  streaks          Streak?
+  chatMessages     ChatMessage[]
+  coordinatedRooms CommunityRoom[]
+  roomMemberships  RoomMember[]
+  sessions         Session[]
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  userId    String
+  expiresAt DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("sessions")
+}
+
+model YearlyDevotion {
+  id          String   @id @default(uuid())
+  userId      String
+  saintId     String
+  year        Int
+  drawnAt     DateTime @default(now())
+  virtueFocus String?
+  progress    Json     @default("{}")
+  createdAt   DateTime @default(now())
+
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  saint          Saint          @relation(fields: [saintId], references: [id])
+  journalEntries JournalEntry[]
+
+  @@unique([userId, year])
+  @@index([userId, year])
+  @@map("yearly_devotions")
+}
+
+model JournalEntry {
+  id                String       @id @default(uuid())
+  userId            String
+  yearlyDevotionId  String
+  content           String       @db.Text
+  mood              JournalMood  @default(REFLECTIVE)
+  date              DateTime     @db.Date
+  createdAt         DateTime     @default(now())
+
+  user            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  yearlyDevotion  YearlyDevotion @relation(fields: [yearlyDevotionId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([yearlyDevotionId])
+  @@map("journal_entries")
+}
+
+model Favorite {
+  id        String   @id @default(uuid())
+  userId    String
+  saintId   String
+  listName  String   @default("favorites")
+  createdAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  saint Saint @relation(fields: [saintId], references: [id])
+
+  @@unique([userId, saintId, listName])
+  @@index([userId])
+  @@map("favorites")
+}
+
+model Donation {
+  id          String         @id @default(uuid())
+  userId      String?
+  amountCents Int
+  txid        String?        @unique
+  e2eid       String?
+  status      DonationStatus @default(PENDING)
+  displayName String?
+  anonymous   Boolean        @default(true)
+  pspResponse Json?
+  confirmedAt DateTime?
+  createdAt   DateTime       @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([status])
+  @@index([txid])
+  @@map("donations")
+}
+
+model CommunityRoom {
+  id            String   @id @default(uuid())
+  code          String   @unique
+  name          String
+  coordinatorId String
+  year          Int
+  createdAt     DateTime @default(now())
+  expiresAt     DateTime
+
+  coordinator User         @relation(fields: [coordinatorId], references: [id])
+  members     RoomMember[]
+
+  @@map("community_rooms")
+}
+
+model RoomMember {
+  id       String    @id @default(uuid())
+  roomId   String
+  userId   String
+  saintId  String?
+  drawnAt  DateTime?
+  joinedAt DateTime  @default(now())
+
+  room  CommunityRoom @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  user  User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  saint Saint?        @relation(fields: [saintId], references: [id])
+
+  @@unique([roomId, userId])
+  @@map("room_members")
+}
+
+model Amen {
+  id        String   @id @default(uuid())
+  userId    String
+  saintId   String
+  date      DateTime @db.Date
+  createdAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  saint Saint @relation(fields: [saintId], references: [id])
+
+  @@unique([userId, saintId, date])
+  @@index([saintId, date])
+  @@map("amens")
+}
+
+model Streak {
+  id               String   @id @default(uuid())
+  userId           String   @unique
+  currentStreak    Int      @default(0)
+  longestStreak    Int      @default(0)
+  lastActivityDate DateTime? @db.Date
+  achievements     Json[]
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("streaks")
+}
+
+model ChatMessage {
+  id        String   @id @default(uuid())
+  userId    String
+  role      ChatRole
+  content   String   @db.Text
+  sources   Json[]
+  sessionId String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([sessionId])
+  @@map("chat_messages")
+}
