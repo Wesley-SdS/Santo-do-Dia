@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- Background Shield -->
+  <path d="M256 16C256 16 48 16 48 80V320C48 420 256 496 256 496C256 496 464 420 464 320V80C464 16 256 16 256 16Z" fill="#1a1625"/>
+  <path d="M256 16C256 16 48 16 48 80V320C48 420 256 496 256 496C256 496 464 420 464 320V80C464 16 256 16 256 16Z" stroke="#c4a265" stroke-width="8"/>
+
+  <!-- Left half - Red/Burgundy with Cross -->
+  <path d="M52 82C52 22 256 20 256 20V488C256 488 52 416 52 318V82Z" fill="#6b1d2a"/>
+
+  <!-- Right half - Blue with M -->
+  <path d="M256 20C256 20 460 22 460 82V318C460 416 256 488 256 488V20Z" fill="#1a3a6b"/>
+
+  <!-- Golden Cross on left -->
+  <rect x="140" y="80" width="16" height="200" rx="4" fill="#c4a265"/>
+  <rect x="104" y="140" width="88" height="16" rx="4" fill="#c4a265"/>
+
+  <!-- M for Maria on right -->
+  <path d="M300 280V140L340 220L380 140V280" stroke="#c4a265" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- Stars around M -->
+  <circle cx="310" cy="120" r="5" fill="#c4a265"/>
+  <circle cx="370" cy="120" r="5" fill="#c4a265"/>
+  <circle cx="290" cy="180" r="4" fill="#c4a265"/>
+  <circle cx="400" cy="180" r="4" fill="#c4a265"/>
+  <circle cx="340" cy="100" r="6" fill="#c4a265"/>
+
+  <!-- Top Cross -->
+  <rect x="248" y="0" width="16" height="40" rx="4" fill="#c4a265"/>
+  <rect x="236" y="10" width="40" height="12" rx="4" fill="#c4a265"/>
+
+  <!-- Bottom Banner -->
+  <path d="M120 380H392C392 380 400 380 400 390V420C400 430 392 430 392 430H120C120 430 112 430 112 420V390C112 380 120 380 120 380Z" fill="#1a3a6b" stroke="#c4a265" stroke-width="3"/>
+  <text x="256" y="412" text-anchor="middle" font-family="serif" font-size="22" font-weight="bold" fill="#c4a265">TOTUS TUUS</text>
+</svg>

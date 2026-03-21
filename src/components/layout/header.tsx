@@ -22,6 +22,7 @@ export function Header() {
           </button>
 
           <Link href="/" className="flex items-center gap-2">
+            <img src="/favicon.svg" alt="FSJPII" className="h-7 w-7" />
             <span className="font-[family-name:var(--font-dm-serif)] text-xl text-gold">
               Santo
             </span>
