@@ -1,7 +1,9 @@
+import { BookOpen, Flame, Heart, LogOut, Star, Trophy, User } from 'lucide-react';
 import type { Metadata } from 'next';
-import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { User, Star, Flame, Trophy, LogOut, BookOpen } from 'lucide-react';
+import { redirect } from 'next/navigation';
+import { StreakCard } from '@/components/gamification/streak-card';
+import { FavoritesList } from '@/components/saints/favorites-list';
 import { auth, signOut } from '@/lib/auth';
 import { prisma } from '@/lib/db';
 
@@ -84,6 +86,28 @@ export default async function PerfilPage() {
           <p className="text-xs text-muted-foreground">Conquistas</p>
         </div>
       </div>
+
+      {/* Streak & Achievements */}
+      <section className="mt-6">
+        <h2 className="flex items-center gap-2 font-[family-name:var(--font-dm-serif)] text-lg text-foreground">
+          <Flame className="h-5 w-5 text-liturgical-red" />
+          Jornada de Fé
+        </h2>
+        <div className="mt-3">
+          <StreakCard />
+        </div>
+      </section>
+
+      {/* Favorites */}
+      <section className="mt-6">
+        <h2 className="flex items-center gap-2 font-[family-name:var(--font-dm-serif)] text-lg text-foreground">
+          <Heart className="h-5 w-5 text-liturgical-red" />
+          Santos Favoritos
+        </h2>
+        <div className="mt-3">
+          <FavoritesList />
+        </div>
+      </section>
 
       {/* Actions */}
       <div className="mt-6 space-y-2">

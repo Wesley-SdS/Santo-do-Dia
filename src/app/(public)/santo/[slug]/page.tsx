@@ -1,9 +1,13 @@
+import { ArrowLeft, BookOpen, Calendar, ExternalLink, Globe, MapPin, Play } from 'lucide-react';
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, Calendar, MapPin, BookOpen, Heart, Play, ExternalLink, Globe } from 'lucide-react';
-import { prisma } from '@/lib/db';
+import { notFound } from 'next/navigation';
+import { AmenButton } from '@/components/saints/amen-button';
+import { FavoriteButton } from '@/components/saints/favorite-button';
+import { SaintJsonLd } from '@/components/seo/saint-jsonld';
+import { ShareButton } from '@/components/sharing/share-button';
 import { SAINT_CATEGORIES_PT } from '@/constants';
+import { prisma } from '@/lib/db';
 
 interface SaintPageProps {
   params: Promise<{ slug: string }>;
@@ -31,8 +35,18 @@ export async function generateMetadata({ params }: SaintPageProps): Promise<Meta
 }
 
 const MONTH_NAMES = [
-  'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-  'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro',
+  'Janeiro',
+  'Fevereiro',
+  'Março',
+  'Abril',
+  'Maio',
+  'Junho',
+  'Julho',
+  'Agosto',
+  'Setembro',
+  'Outubro',
+  'Novembro',
+  'Dezembro',
 ];
 
 interface VideoData {
@@ -57,6 +71,7 @@ export default async function SaintPage({ params }: SaintPageProps) {
 
   return (
     <div className="mx-auto max-w-3xl px-4 pb-24">
+      <SaintJsonLd saint={saint} />
       {/* Back Button */}
       <div className="py-4">
         <Link
@@ -110,7 +125,8 @@ export default async function SaintPage({ params }: SaintPageProps) {
         {saint.century && (
           <span className="flex items-center gap-1.5">
             <BookOpen className="h-4 w-4" />
-            Século {Math.abs(saint.century)}{saint.century < 0 ? ' a.C.' : ''}
+            Século {Math.abs(saint.century)}
+            {saint.century < 0 ? ' a.C.' : ''}
           </span>
         )}
         {saint.birthDate && saint.deathDate && (
@@ -168,10 +184,7 @@ export default async function SaintPage({ params }: SaintPageProps) {
           </h2>
           <div className="mt-4 space-y-4">
             {(saint.quotes as Array<{ text: string; source?: string }>).map((quote, i) => (
-              <blockquote
-                key={i}
-                className="rounded-xl border-l-4 border-gold bg-gold/5 p-4"
-              >
+              <blockquote key={i} className="rounded-xl border-l-4 border-gold bg-gold/5 p-4">
                 <p className="font-[family-name:var(--font-dm-serif)] text-[15px] italic leading-relaxed text-foreground">
                   &ldquo;{quote.text}&rdquo;
                 </p>
@@ -220,7 +233,9 @@ export default async function SaintPage({ params }: SaintPageProps) {
               >
                 <div className="relative shrink-0 overflow-hidden rounded-lg">
                   <img
-                    src={video.thumbnailUrl ?? `https://i.ytimg.com/vi/${video.videoId}/mqdefault.jpg`}
+                    src={
+                      video.thumbnailUrl ?? `https://i.ytimg.com/vi/${video.videoId}/mqdefault.jpg`
+                    }
                     alt={video.title}
                     className="h-20 w-36 object-cover"
                     loading="lazy"
@@ -244,14 +259,15 @@ export default async function SaintPage({ params }: SaintPageProps) {
       )}
 
       {/* Action Buttons */}
-      <div className="mt-8 flex gap-3">
-        <button
-          type="button"
-          className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-gold px-4 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-gold-dark"
-        >
-          <Heart className="h-4 w-4" />
-          Amém
-        </button>
+      <div className="mt-8 flex items-center gap-3">
+        <AmenButton saintId={saint.id} />
+        <FavoriteButton saintId={saint.id} />
+        <ShareButton
+          title={saint.name}
+          text={`Conheça ${saint.name} — ${saint.biographyShort.slice(0, 120)}...`}
+          url={`/santo/${saint.slug}`}
+          imageUrl={saint.imageUrl}
+        />
       </div>
     </div>
   );
