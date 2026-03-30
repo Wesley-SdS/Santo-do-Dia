@@ -1,8 +1,8 @@
 'use client';
 
 import { Search, X } from 'lucide-react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 const CATEGORIES = [
   { value: '', label: 'Todas as categorias' },
@@ -36,8 +36,14 @@ export function SaintSearchForm({ initialQuery, initialCategory }: SaintSearchFo
     [router],
   );
 
-  // Debounced search on typing
+  const isInitialMount = useRef(true);
+
+  // Debounced search on typing (skip initial mount to avoid resetting page param)
   useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
     const timeout = setTimeout(() => {
       pushSearch(query, category);
     }, 400);

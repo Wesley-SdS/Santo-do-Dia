@@ -42,11 +42,13 @@ export function LeafletMap({ saints }: LeafletMapProps) {
   useEffect(() => {
     if (!mapRef.current || mapInstanceRef.current) return;
 
+    const controller = new AbortController();
+
     async function initMap() {
       const L = await import('leaflet');
       await import('leaflet/dist/leaflet.css');
 
-      if (!mapRef.current) return;
+      if (!mapRef.current || controller.signal.aborted || mapInstanceRef.current) return;
 
       const map = L.map(mapRef.current).setView([20, 10], 2);
       mapInstanceRef.current = map;
@@ -90,6 +92,7 @@ export function LeafletMap({ saints }: LeafletMapProps) {
     initMap();
 
     return () => {
+      controller.abort();
       if (mapInstanceRef.current) {
         (mapInstanceRef.current as { remove: () => void }).remove();
         mapInstanceRef.current = null;

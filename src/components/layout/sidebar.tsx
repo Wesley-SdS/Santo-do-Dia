@@ -13,10 +13,12 @@ import {
   MessageCircle,
   Moon,
   Sparkles,
+  Sun,
   User,
   Users,
   X,
 } from 'lucide-react';
+import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import { useEffect } from 'react';
 
@@ -41,6 +43,8 @@ const NAV_ITEMS = [
 ] as const;
 
 export function Sidebar({ open, onClose }: SidebarProps) {
+  const { theme, setTheme } = useTheme();
+
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden';
@@ -116,6 +120,29 @@ export function Sidebar({ open, onClose }: SidebarProps) {
 
         {/* Footer */}
         <div className="border-t border-border p-4">
+          {/* Theme Toggle */}
+          <button
+            type="button"
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            className="mb-3 flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm text-foreground transition-colors hover:bg-muted"
+          >
+            <span className="flex items-center gap-3">
+              {theme === 'dark' ? (
+                <Sun className="h-5 w-5 text-muted-foreground" />
+              ) : (
+                <Moon className="h-5 w-5 text-muted-foreground" />
+              )}
+              {theme === 'dark' ? 'Modo Claro' : 'Modo Escuro'}
+            </span>
+            <div
+              className={`relative h-6 w-11 rounded-full transition-colors ${theme === 'dark' ? 'bg-gold' : 'bg-muted-foreground/30'}`}
+            >
+              <div
+                className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${theme === 'dark' ? 'translate-x-5' : 'translate-x-0.5'}`}
+              />
+            </div>
+          </button>
+
           <Link
             href="/apoiar"
             onClick={onClose}

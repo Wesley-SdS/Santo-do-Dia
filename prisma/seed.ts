@@ -1,3 +1,4 @@
+import bcrypt from 'bcryptjs';
 import { PrismaClient } from '@prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
 import type { SaintSeedData } from './seeds/types';
@@ -114,13 +115,39 @@ async function main() {
     }
   }
 
-  console.log(`\n✅ Seed concluído!`);
+  console.log(`\n✅ Seed de santos concluído!`);
   console.log(`   Criados: ${created}`);
   console.log(`   Atualizados: ${updated}`);
   if (errors > 0) {
     console.log(`   Erros: ${errors}`);
   }
   console.log(`   Total: ${allSaints.length} santos`);
+
+  // Seed admin user
+  console.log('\n👤 Criando usuário admin...');
+  const adminEmail = 'admin@santododia.com.br';
+  const adminPassword = await bcrypt.hash('admin123', 12);
+
+  const existingAdmin = await prisma.user.findUnique({ where: { email: adminEmail } });
+  if (existingAdmin) {
+    console.log('   ↻ Admin já existe, atualizando...');
+    await prisma.user.update({
+      where: { email: adminEmail },
+      data: { name: 'Admin', password: adminPassword, emailVerified: new Date() },
+    });
+  } else {
+    await prisma.user.create({
+      data: {
+        name: 'Admin',
+        email: adminEmail,
+        password: adminPassword,
+        emailVerified: new Date(),
+      },
+    });
+    console.log('   ✓ Admin criado');
+  }
+  console.log(`   Email: ${adminEmail}`);
+  console.log('   Senha: admin123');
 }
 
 main()

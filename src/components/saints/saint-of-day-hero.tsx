@@ -1,29 +1,35 @@
 import { prisma } from '@/lib/db';
+import { logger } from '@/lib/logger';
 import { SaintCard } from './saint-card';
 
 async function getSaintOfTheDay() {
-  const now = new Date();
-  const month = now.getMonth() + 1;
-  const day = now.getDate();
+  try {
+    const now = new Date();
+    const month = now.getMonth() + 1;
+    const day = now.getDate();
 
-  const saints = await prisma.saint.findMany({
-    where: { feastMonth: month, feastDay: day },
-    take: 1,
-  });
+    const saints = await prisma.saint.findMany({
+      where: { feastMonth: month, feastDay: day },
+      take: 1,
+    });
 
-  if (saints.length === 0) {
-    // Fallback: get any saint
-    const count = await prisma.saint.count();
-    if (count === 0) return null;
-    const dayOfYear = Math.floor(
-      (now.getTime() - new Date(now.getFullYear(), 0, 0).getTime()) / 86400000,
-    );
-    const skip = dayOfYear % count;
-    const fallback = await prisma.saint.findMany({ skip, take: 1 });
-    return fallback[0] ?? null;
+    if (saints.length === 0) {
+      // Fallback: get any saint
+      const count = await prisma.saint.count();
+      if (count === 0) return null;
+      const dayOfYear = Math.floor(
+        (now.getTime() - new Date(now.getFullYear(), 0, 0).getTime()) / 86400000,
+      );
+      const skip = dayOfYear % count;
+      const fallback = await prisma.saint.findMany({ skip, take: 1 });
+      return fallback[0] ?? null;
+    }
+
+    return saints[0];
+  } catch (error) {
+    logger.error({ error }, 'Failed to fetch saint of the day');
+    return null;
   }
-
-  return saints[0];
 }
 
 export async function SaintOfDayHero() {
