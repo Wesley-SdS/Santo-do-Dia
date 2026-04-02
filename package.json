@@ -17,7 +17,7 @@
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:push": "prisma db push",
-    "db:seed": "tsx prisma/seed.ts",
+    "db:seed": "pnpm db:generate && tsx prisma/seed.ts",
     "db:studio": "prisma studio",
     "enrich": "tsx scripts/enrich-saints.ts",
     "enrich:images": "tsx scripts/enrich-saints.ts --images-only",

@@ -43,7 +43,7 @@ docker run -d \
   -e POSTGRES_USER=santododia \
   -e POSTGRES_PASSWORD=santododia_dev \
   -e POSTGRES_DB=santododia \
-  -p 5432:5432 \
+  -p 5433:5432 \
   pgvector/pgvector:pg16
 ```
 
